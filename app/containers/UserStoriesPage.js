@@ -24,7 +24,10 @@ import { UserStoriesView } from "../components/UserStoriesView";
 import {
   fetchRequestStories,
   fetchSuccessStories,
-  fetchFailureStories
+  fetchFailureStories,
+  editStoryRequest,
+  editStorySuccess,
+  editStoryFailure
 } from "../actions/ActionCreators";
 import { styles } from "../styles/styles";
 import { AddStory } from "../components/AddStory";
@@ -217,7 +220,10 @@ class UserStoriesPage extends Component {
     console.log("id: ", id);
     console.log("text: ", text);
     console.log("image: ", image);
-    this.props.navigation.navigate("AddStory", { id, text, image });
+
+    this.props.onEditStoryRequest(id, text, image);
+
+    this.props.navigation.navigate("AddStory");
   };
 
   deleteStory(myStoryID) {
@@ -236,7 +242,7 @@ class UserStoriesPage extends Component {
         id={item.id}
         userProfile={item.user.image}
         userName={item.user.first_name}
-        userIDInStory={item.user.user_id}
+        userIDInStory={item.user_id}
         storyDate={item.created_at}
         storyImage={item.image}
         storyDescription={item.description}
@@ -306,7 +312,12 @@ mapDispatchToProps = dispatch => {
   return {
     onFetchRequest: () => dispatch(fetchRequestStories()),
     onFetchSuccess: stories => dispatch(fetchSuccessStories(stories)),
-    onFetchFailure: () => dispatch(fetchFailureStories())
+    onFetchFailure: () => dispatch(fetchFailureStories()),
+    onEditStoryRequest: (id, text, image) =>
+      dispatch(editStoryRequest(id, text, image)),
+    onEditStorySuccess: (storyID, storyText, storyImage) =>
+      dispatch(editStorySuccess(storyID, storyText, storyImage)),
+    onEditStoryFailure: error => dispatch(editStoryFailure(error))
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(UserStoriesPage);

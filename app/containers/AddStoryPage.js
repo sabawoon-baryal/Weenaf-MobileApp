@@ -79,15 +79,14 @@ class AddStoryPage extends Component {
   };
 
   render() {
-    // props of story being edited
-    const { params } = this.props.navigation.state;
     return (
       <View>
         <AddStory
+          editingStoryID={this.props.editingStoryID}
+          editingStoryText={this.props.editingStoryText}
+          editingStoryImage={this.props.editingStoryImage}
+          editingStory={this.props.editingStory}
           toProfile={this.goToProfile}
-          // editStoryID={params.id}
-          // editStoryText={params.text}
-          // editStoryImage={params.image}
           ref={child => {
             this.child = child;
           }}
@@ -101,7 +100,11 @@ class AddStoryPage extends Component {
 mapStateToProps = state => {
   return {
     disable: state.AddStoryButtonReducer.disablePostBtn,
-    onPressedPostBtn: state.AddStoryButtonReducer.onPressedPostBtn
+    onPressedPostBtn: state.AddStoryButtonReducer.onPressedPostBtn,
+    editingStoryID: state.EditStoryReducer.storyID,
+    editingStoryText: state.EditStoryReducer.storyText,
+    editingStoryImage: state.EditStoryReducer.storyImage,
+    editingStory: state.EditStoryReducer.editingStory
   };
 };
 mapDispatchToProps = dispatch => {

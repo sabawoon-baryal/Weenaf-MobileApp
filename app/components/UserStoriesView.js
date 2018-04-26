@@ -13,7 +13,6 @@ import {
 import Icon from "react-native-vector-icons/FontAwesome";
 import Modal from "react-native-modal";
 import { ListItem, List } from "react-native-elements";
-
 import { styles } from "../styles/styles";
 
 const localhost = Platform.OS == "android" ? "172.30.10.42" : "localhost";
@@ -105,7 +104,8 @@ export class UserStoriesView extends Component {
               marginRight: 50
             }}
           >
-            {this.props.userID == this.props.userIDInStory
+            {/* this.props.userID == this.props.userIDInStory */}
+            {this.props.userIDInStory == 10
               ? <Icon
                   name="ellipsis-h"
                   size={20}

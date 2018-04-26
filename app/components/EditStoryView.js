@@ -17,7 +17,7 @@ import { styles } from "../styles/styles";
 import ImagePicker from "react-native-image-picker";
 import * as Progress from "react-native-progress";
 
-export class AddStory extends Component {
+export class EditStoryView extends Component {
   constructor() {
     super();
     this.state = {
@@ -26,7 +26,7 @@ export class AddStory extends Component {
       image: null,
       disablePostBtn: true,
       storyText: "",
-      storyID: null
+      storyID = null
     };
   }
 
@@ -89,13 +89,11 @@ export class AddStory extends Component {
   };
 
   componentDidMount() {
-    if (this.props.editingStory == true) {
-      this.setState({
-        storyText: this.props.editingStoryText,
-        image: this.props.editingStoryImage,
-        storyID: this.props.editingStoryID
-      });
-    }
+    this.setState({
+      storyText: this.props.editingStoryText,
+      image: this.props.editingStoryImage,
+      storyID: this.props.editingStoryID
+    });
   }
 
   render() {

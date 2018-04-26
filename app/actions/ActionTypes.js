@@ -18,6 +18,10 @@ const addStoryButtonCondition = "ADD_STORY_BUTTON_CONDITION";
 
 const onAddStoryButtonPressed = "ON_ADD_STORY_BUTTON_PRESSED";
 
+const onEditStoryRequest = "ON_EDIT_STORY_REQUEST";
+const onEditStorySuccess = "ON_EDIT_STORY_SUCCESS";
+const onEditStoryFailure = "ON_EDIT_STORY_FAILURE";
+
 export {
   setUserContact,
   setUserName,
@@ -32,5 +36,8 @@ export {
   loginSuccess,
   loginFailure,
   addStoryButtonCondition,
-  onAddStoryButtonPressed
+  onAddStoryButtonPressed,
+  onEditStoryRequest,
+  onEditStorySuccess,
+  onEditStoryFailure
 };

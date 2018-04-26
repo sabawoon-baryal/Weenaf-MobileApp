@@ -12,7 +12,10 @@ import {
   loginSuccess,
   loginFailure,
   addStoryButtonCondition,
-  onAddStoryButtonPressed
+  onAddStoryButtonPressed,
+  onEditStoryRequest,
+  onEditStorySuccess,
+  onEditStoryFailure
 } from "./ActionTypes";
 
 // user registration
@@ -148,7 +151,6 @@ export const fetchFailureStories = () => {
 // add story button condition
 
 export const addStoryButton = disable => {
-  console.log("disable in actin creator: ", disable);
   return {
     type: addStoryButtonCondition,
     disablePostBtn: disable
@@ -159,5 +161,39 @@ export const addStoryButtonPressed = pressed => {
   return {
     type: onAddStoryButtonPressed,
     pressed: pressed
+  };
+};
+
+// edit story
+
+export const editStoryRequest = (id, text, image) => {
+  return {
+    type: onEditStoryRequest,
+    storyID: id,
+    storyText: text,
+    storyImage: image,
+    editingStory: true,
+    edited: false
+  };
+};
+
+export const editStorySuccess = (id, text, image) => {
+  return {
+    type: onEditStorySuccess,
+    storyID: id,
+    storyText: text,
+    storyImage: image,
+    editingStory: false,
+    edited: true,
+    error: null
+  };
+};
+
+export const editStoryFailure = error => {
+  return {
+    type: onEditStoryFailure,
+    error: error,
+    editingStory: false,
+    edited: false
   };
 };

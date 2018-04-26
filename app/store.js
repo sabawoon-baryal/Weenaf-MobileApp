@@ -14,6 +14,7 @@ import SignUpReducer from "./reducers/SignUpReducer";
 import storiesReducer from "./reducers/storiesReducer";
 import LoginReducer from "./reducers/LoginReducer";
 import AddStoryButtonReducer from "./reducers/AddStoryButtonReducer";
+import EditStoryReducer from "./reducers/EditStoryReducer";
 
 // Middleware
 const middleware = () => {
@@ -46,7 +47,8 @@ export default createStore(
     SignUpReducer,
     storiesReducer,
     LoginReducer,
-    AddStoryButtonReducer
+    AddStoryButtonReducer,
+    EditStoryReducer
   }),
   middleware()
 );
