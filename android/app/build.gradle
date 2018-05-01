@@ -107,6 +107,8 @@ android {
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
+        // this is add
+        vectorDrawables.useSupportLibrary = true
 
     }
     splits {
@@ -139,6 +141,8 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-image-crop-picker')
+    compile project(':react-native-linear-gradient')
     // compile project(':react-native-fbsdk')
     compile project(':react-native-fetch-blob')
     // compile project(':react-native-image-crop-picker')

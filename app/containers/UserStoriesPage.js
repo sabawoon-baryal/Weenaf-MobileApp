@@ -216,12 +216,12 @@ class UserStoriesPage extends Component {
     this.props.navigation.navigate("Main");
   };
 
-  editStory = (id, text, image) => {
+  editStory = (id, text, image, imageHeight) => {
     console.log("id: ", id);
     console.log("text: ", text);
     console.log("image: ", image);
 
-    this.props.onEditStoryRequest(id, text, image);
+    this.props.onEditStoryRequest(id, text, image, imageHeight);
 
     this.props.navigation.navigate("AddStory");
   };
@@ -235,6 +235,12 @@ class UserStoriesPage extends Component {
   }
 
   _renderItem = ({ item }) => {
+    let imageHeight;
+    if (item.image !== null) {
+      imageHeight = item.propImage.height;
+    } else {
+      imageHeight = 0;
+    }
     return (
       <UserStoriesView
         toEditStory={this.editStory}
@@ -245,6 +251,7 @@ class UserStoriesPage extends Component {
         userIDInStory={item.user_id}
         storyDate={item.created_at}
         storyImage={item.image}
+        storyImageHeight={imageHeight}
         storyDescription={item.description}
         toProfile={this.goToProfile}
         userID={this.props.userID}
@@ -257,6 +264,7 @@ class UserStoriesPage extends Component {
   };
 
   render() {
+    console.log("iamge: ", this.state.data.propImage);
     if (this.state.netConnectivity) {
       return (
         <View>
@@ -313,8 +321,8 @@ mapDispatchToProps = dispatch => {
     onFetchRequest: () => dispatch(fetchRequestStories()),
     onFetchSuccess: stories => dispatch(fetchSuccessStories(stories)),
     onFetchFailure: () => dispatch(fetchFailureStories()),
-    onEditStoryRequest: (id, text, image) =>
-      dispatch(editStoryRequest(id, text, image)),
+    onEditStoryRequest: (id, text, image, imageHeight) =>
+      dispatch(editStoryRequest(id, text, image, imageHeight)),
     onEditStorySuccess: (storyID, storyText, storyImage) =>
       dispatch(editStorySuccess(storyID, storyText, storyImage)),
     onEditStoryFailure: error => dispatch(editStoryFailure(error))

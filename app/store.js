@@ -1,6 +1,7 @@
 // Redux
 import { applyMiddleware, combineReducers, createStore } from "redux";
 import logger from "redux-logger";
+import thunkMiddleware from "redux-thunk";
 
 import { Tabs } from "./navigation/TabNav/TabNavConfig";
 import { TopLevelNavigator } from "./navigation/topLevelNavigator/TopNavConfiguration";
@@ -15,12 +16,12 @@ import storiesReducer from "./reducers/storiesReducer";
 import LoginReducer from "./reducers/LoginReducer";
 import AddStoryButtonReducer from "./reducers/AddStoryButtonReducer";
 import EditStoryReducer from "./reducers/EditStoryReducer";
+import UpdateProfileReducer from "./reducers/UpdateProfileReducer";
 
 // Middleware
-const middleware = () => {
-  return applyMiddleware(logger);
-};
-
+// const middleware = () => {
+//   return {applyMiddleware(thunkMiddleware), applyMiddleware(logger)};
+// };
 export default createStore(
   combineReducers({
     topNavigator: (state, action) =>
@@ -48,7 +49,9 @@ export default createStore(
     storiesReducer,
     LoginReducer,
     AddStoryButtonReducer,
-    EditStoryReducer
+    EditStoryReducer,
+    UpdateProfileReducer
   }),
-  middleware()
+  applyMiddleware(thunkMiddleware),
+  applyMiddleware(logger)
 );

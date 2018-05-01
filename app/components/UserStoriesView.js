@@ -54,7 +54,8 @@ export class UserStoriesView extends Component {
       this.props.toEditStory(
         this.props.id,
         this.props.storyDescription,
-        this.props.storyImage
+        this.props.storyImage,
+        this.props.storyImageHeight
       );
     } else if (item.title == "Delete Story") {
       this.setState({ isModalVisible: false });
@@ -74,8 +75,12 @@ export class UserStoriesView extends Component {
   };
 
   render() {
-    console.log("userId in story: ", this.props.userIDInStory);
-    console.log("userId in redux: ", this.props.userID);
+    let imageHeight;
+    if (this.props.storyImageHeight == null) {
+      imageHeight = 0;
+    } else {
+      imageHeight = this.props.storyImageHeight;
+    }
     return (
       <View style={styles.ListItemContainer}>
         <View style={styles.ListItemHeader}>
@@ -115,15 +120,19 @@ export class UserStoriesView extends Component {
           </View>
         </View>
 
-        <Image
-          source={{
-            uri: `http://${localhost}:8000` + `${this.props.storyImage}`
-          }}
-          style={styles.ListItemImage}
-        />
-        <Text style={styles.storyDescription}>
-          {this.props.storyDescription}
-        </Text>
+        {this.props.storyImage !== null
+          ? <Image
+              source={{
+                uri: `http://${localhost}:8000/` + `${this.props.storyImage}`
+              }}
+              style={{ height: imageHeight }}
+            />
+          : <View />}
+        {this.props.storyDescription !== null
+          ? <Text style={styles.storyDescription}>
+              {this.props.storyDescription}
+            </Text>
+          : <View />}
 
         <View>
           {this.state.isModalVisible

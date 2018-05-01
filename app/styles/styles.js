@@ -123,10 +123,6 @@ export const styles = StyleSheet.create({
     marginVertical: 10,
     marginHorizontal: 5
   },
-  ListItemImage: {
-    width: "100%",
-    height: 400
-  },
   profileImage: {
     width: 40,
     height: 40,
@@ -160,5 +156,102 @@ export const styles = StyleSheet.create({
     height: 100,
     backgroundColor: "white",
     marginVertical: 10
+  },
+  wrapper: {
+    backgroundColor: "red"
+  },
+  slide1: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#9DD6EB"
+  },
+  slide2: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#97CAE5"
+  },
+  slide3: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#92BBD9"
+  },
+  text: {
+    color: "#fff",
+    fontSize: 30,
+    fontWeight: "bold"
+  },
+
+  // More Tab
+
+  profilePicture: {
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgb(255,255,255)",
+    width: 80,
+    height: 80,
+    borderRadius: 100,
+    borderWidth: 0.3
+  },
+  profilePictureWithImage: {
+    justifyContent: "center",
+    alignItems: "center",
+    width: 80,
+    height: 80,
+    borderRadius: 100,
+    borderWidth: 0.3
+  },
+  profileBackground: {
+    width: "100%",
+    height: 200
+  },
+  profileBackgroundContainer: {
+    alignItems: "center",
+    justifyContent: "center",
+    paddingTop: 30
+  },
+  profilePickerBtn: {
+    borderTopWidth: 0.5,
+    borderBottomWidth: 0.5,
+    padding: 20,
+    height: "100%",
+    alignItems: "center"
+  },
+  profileName: {
+    paddingVertical: 10,
+    color: "rgb(0,0,0)"
+  },
+
+  // profile options
+
+  profileOptions: {
+    borderTopWidth: 0.2,
+    backgroundColor: "rgb(255,255,255)"
+  },
+
+  linearGradient: {
+    flex: 1,
+    paddingLeft: 15,
+    paddingRight: 15,
+    borderRadius: 5
+  },
+  buttonText: {
+    fontSize: 18,
+    fontFamily: "Gill Sans",
+    textAlign: "center",
+    margin: 10,
+    color: "#ffffff",
+    backgroundColor: "transparent"
+  },
+  saveProfilePicture: {
+    borderWidth: 0.2,
+    padding: 10
+  },
+  disabledSaveProfilePicture: {
+    borderWidth: 0.2,
+    padding: 10,
+    backgroundColor: "red"
   }
 });

@@ -22,6 +22,10 @@ const onEditStoryRequest = "ON_EDIT_STORY_REQUEST";
 const onEditStorySuccess = "ON_EDIT_STORY_SUCCESS";
 const onEditStoryFailure = "ON_EDIT_STORY_FAILURE";
 
+const onChangeProfilePictureRequest = "ON_CHANGE_PROFILE_PICTURE_REQUEST";
+const onChangeProfilePictureSuccess = "ON_CHANGE_PROFILE_PICTURE_SUCCESS";
+const onChangeProfilePictureFailure = "ON_CHANGE_PROFILE_PICTURE_FAILURE";
+
 export {
   setUserContact,
   setUserName,
@@ -39,5 +43,8 @@ export {
   onAddStoryButtonPressed,
   onEditStoryRequest,
   onEditStorySuccess,
-  onEditStoryFailure
+  onEditStoryFailure,
+  onChangeProfilePictureRequest,
+  onChangeProfilePictureSuccess,
+  onChangeProfilePictureFailure
 };

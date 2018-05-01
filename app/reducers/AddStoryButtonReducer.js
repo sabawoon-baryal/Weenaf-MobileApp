@@ -8,7 +8,6 @@ const defualtState = {
 };
 
 export default function AddStoryButtonReducer(state = defualtState, action) {
-  console.log("disable in reducer: ", action.disablePostBtn);
   switch (action.type) {
     case addStoryButtonCondition:
       return {

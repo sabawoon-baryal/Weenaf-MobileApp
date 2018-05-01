@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import {
+  Platform,
   ScrollView,
   ImageBackground,
   StyleSheet,
@@ -17,6 +18,8 @@ import { styles } from "../styles/styles";
 import ImagePicker from "react-native-image-picker";
 import * as Progress from "react-native-progress";
 
+const localhost = Platform.OS == "android" ? "172.30.10.42" : "localhost";
+
 export class AddStory extends Component {
   constructor() {
     super();
@@ -26,7 +29,9 @@ export class AddStory extends Component {
       image: null,
       disablePostBtn: true,
       storyText: "",
-      storyID: null
+      storyID: null,
+      editingStory: false,
+      imagePickerBtnPressed: false
     };
   }
 
@@ -57,12 +62,19 @@ export class AddStory extends Component {
         let source = { uri: response.uri };
         let imageHeight = { height: response.height };
 
+        if (this.props.editingStory) {
+          this.setState({ imagePickerBtnPressed: true });
+        } else {
+          this.setState({ imagePickerBtnPressed: false });
+        }
+
         this.setState({
           avatarSource: source,
           avatarHeight: imageHeight.height,
           image: response,
           disablePostBtn: false
         });
+        console.log("avatar source /////////////// : ", source);
         this.props.disablePostBtn(false);
       }
     });
@@ -76,12 +88,17 @@ export class AddStory extends Component {
       return {
         image: this.state.image,
         text: this.state.storyText,
-        disablePostBtn: this.state.disablePostBtn
+        storyID: this.props.editingStoryID,
+        disablePostBtn: this.state.disablePostBtn,
+        editStory: this.state.editingStory
       };
     }
   };
 
   closeImage = () => {
+    if (this.props.editingStory) {
+      this.props.disablePostBtn(false);
+    }
     if (this.state.storyText == "") {
       this.props.disablePostBtn(true);
     }
@@ -92,9 +109,11 @@ export class AddStory extends Component {
     if (this.props.editingStory == true) {
       this.setState({
         storyText: this.props.editingStoryText,
-        image: this.props.editingStoryImage,
-        storyID: this.props.editingStoryID
+        avatarSource: this.props.editingStoryImage,
+        storyID: this.props.editingStoryID,
+        editingStory: this.props.editingStory
       });
+      console.log("heloo.////////////////// : ", this.props.editingStoryImage);
     }
   }
 
@@ -141,29 +160,81 @@ export class AddStory extends Component {
                 >
                   <Text>Select a Photo</Text>
                 </TouchableOpacity>
-              : <ImageBackground
-                  source={this.state.avatarSource}
-                  style={{
-                    width: "100%",
-                    height: this.state.avatarHeight
-                  }}
-                >
-                  <View style={{ alignItems: "flex-end" }}>
-                    <Text
+              : this.props.editingStory
+                ? this.state.imagePickerBtnPressed
+                  ? <ImageBackground
+                      source={this.state.avatarSource}
                       style={{
-                        fontSize: 30,
-                        marginRight: 15,
-                        marginTop: 15,
-                        backgroundColor: "rgba(168, 178, 193, 0.1)",
-                        paddingHorizontal: 15,
-                        borderRadius: 3
+                        width: "100%",
+                        height: this.state.avatarHeight
                       }}
-                      onPress={this.closeImage.bind(this)}
                     >
-                      ×
-                    </Text>
-                  </View>
-                </ImageBackground>}
+                      <View style={{ alignItems: "flex-end" }}>
+                        <Text
+                          style={{
+                            fontSize: 30,
+                            marginRight: 15,
+                            marginTop: 15,
+                            backgroundColor: "rgba(168, 178, 193, 0.1)",
+                            paddingHorizontal: 15,
+                            borderRadius: 3
+                          }}
+                          onPress={this.closeImage.bind(this)}
+                        >
+                          ×
+                        </Text>
+                      </View>
+                    </ImageBackground>
+                  : <ImageBackground
+                      source={{
+                        uri:
+                          `http://${localhost}:8000/` +
+                          `${this.state.avatarSource}`
+                      }}
+                      style={{
+                        width: "100%",
+                        height: this.props.editingStoryImageHeight
+                      }}
+                    >
+                      <View style={{ alignItems: "flex-end" }}>
+                        <Text
+                          style={{
+                            fontSize: 30,
+                            marginRight: 15,
+                            marginTop: 15,
+                            backgroundColor: "rgba(168, 178, 193, 0.1)",
+                            paddingHorizontal: 15,
+                            borderRadius: 3
+                          }}
+                          onPress={this.closeImage.bind(this)}
+                        >
+                          ×
+                        </Text>
+                      </View>
+                    </ImageBackground>
+                : <ImageBackground
+                    source={this.state.avatarSource}
+                    style={{
+                      width: "100%",
+                      height: this.state.avatarHeight
+                    }}
+                  >
+                    <View style={{ alignItems: "flex-end" }}>
+                      <Text
+                        style={{
+                          fontSize: 30,
+                          marginRight: 15,
+                          marginTop: 15,
+                          backgroundColor: "rgba(168, 178, 193, 0.1)",
+                          paddingHorizontal: 15,
+                          borderRadius: 3
+                        }}
+                        onPress={this.closeImage.bind(this)}
+                      >
+                        ×
+                      </Text>
+                    </View>
+                  </ImageBackground>}
           </View>
         </View>
       </ScrollView>

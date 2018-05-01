@@ -26,7 +26,7 @@ const routeConfig = {
   SignUpFinal: { screen: SignUpFinal }
 };
 const navigatorConfig = {
-  initialRouteName: "Login",
+  initialRouteName: "TabNavigation",
   headerMode: "none",
   navigationOptions: {
     headerStyle: {

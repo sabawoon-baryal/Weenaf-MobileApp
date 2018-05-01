@@ -101,6 +101,7 @@ const routeConfig = {
 };
 
 const navigationConfig = {
+  initialRouteName: "More",
   tabBarOptions: {
     activeTintColor: "tomato",
     inactiveTintColor: "gray"

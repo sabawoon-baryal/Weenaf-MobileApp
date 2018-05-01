@@ -14,10 +14,17 @@ export class OptionsPage extends Component {
   goToEditProfile = () => {
     this.props.navigation.navigate("Main");
   };
+
+  goToProfile = () => {
+    this.props.navigation.navigate("Profile");
+  };
   render() {
     return (
       <View style={{ flex: 1, backgroundColor: "white" }}>
-        <MoreOptionsView toEditProfile={this.goToEditProfile} />
+        <MoreOptionsView
+          toEditProfile={this.goToEditProfile}
+          toProfile={this.goToProfile}
+        />
       </View>
     );
   }

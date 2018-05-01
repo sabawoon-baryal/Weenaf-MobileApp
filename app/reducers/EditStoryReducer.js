@@ -21,6 +21,7 @@ export default function EditStoryReducer(state = defaultState, action) {
         storyID: action.storyID,
         storyText: action.storyText,
         storyImage: action.storyImage,
+        storyImageHeight: action.storyImageHeight,
         editingStory: action.editingStory,
         edited: action.edited
       };
