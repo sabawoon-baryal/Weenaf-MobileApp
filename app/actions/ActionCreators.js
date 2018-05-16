@@ -18,10 +18,23 @@ import {
   onEditStoryFailure,
   onChangeProfilePictureRequest,
   onChangeProfilePictureSuccess,
-  onChangeProfilePictureFailure
+  onChangeProfilePictureFailure,
+  getUserStoriesRequest,
+  getUserStoriesSuccess,
+  getUserStoriesFailure,
+  passSelectedUserStoryRequest,
+  passSelectedUserStorySuccess,
+  passSelectedUserStoryFailure,
+  getUserEmergencyRequestsRequest,
+  getUserEmergencyRequestsSuccess,
+  getUserEmergencyRequestsFailure
 } from "./ActionTypes";
 import RNFetchBlob from "react-native-fetch-blob";
 import { EDIT_USER } from "../links/URLs";
+import { Platform } from "react-native";
+
+// domain:
+const localhost = Platform.OS == "android" ? "172.30.10.42" : "localhost";
 
 // user registration
 
@@ -213,7 +226,7 @@ export const changeProfile = profilePicture => {
     dispatch(changeProfileRequest());
     RNFetchBlob.fetch(
       "PATCH",
-      `http://172.30.10.42:8000/api/users/12`,
+      `http://172.30.10.42:8000/api/users/10`,
       {
         Authorization: "Bearer access-token",
         otherHeader: "foo",
@@ -273,6 +286,88 @@ const changeProfileFailure = error => {
     type: onChangeProfilePictureFailure,
     changing: false,
     changed: false,
+    error
+  };
+};
+
+// get user stories with async action creator:
+// this is a thunk:
+export const onGetUserStories = () => {
+  return dispatch => {
+    dispatch(onGetUserStoriesRequest());
+    fetch(`http://${localhost}:8000/api/stories/10`, { method: "GET" })
+      .then(response => {
+        if (response.status == 200) {
+          return response.json();
+        } else {
+          throw response;
+        }
+        return null;
+      })
+      .then(responseJson => {
+        dispatch(onGetUserStoriesSuccess(responseJson));
+        console.log("get user success: ", responseJson);
+      })
+      .catch(error => {
+        dispatch(onGetUserStoriesFailure());
+        console.log("get user failure: ", error);
+      });
+  };
+};
+
+const onGetUserStoriesRequest = () => {
+  return {
+    type: getUserStoriesRequest,
+    fetching: true,
+    fetched: false
+  };
+};
+
+const onGetUserStoriesSuccess = stories => {
+  return {
+    type: getUserStoriesSuccess,
+    fetching: false,
+    fetched: true,
+    stories,
+    error: null
+  };
+};
+
+const onGetUserStoriesFailure = error => {
+  return {
+    type: getUserStoriesFailure,
+    getting: false,
+    got: false,
+    error
+  };
+};
+
+// pass selected user story:
+// this does not need side effects, so no thunk!
+
+export const onPassSelectedUserStoryRequest = story => {
+  return {
+    type: passSelectedUserStoryRequest,
+    passing: true,
+    passed: false,
+    story
+  };
+};
+export const onPassSelectedUserStorySuccess = story => {
+  return {
+    type: passSelectedUserStorySuccess,
+    passing: false,
+    passed: true,
+    error: null,
+    story
+  };
+};
+
+export const onPassSelectedUserStoryFailure = error => {
+  return {
+    type: passSelectedUserStoryFailure,
+    passing: false,
+    passed: false,
     error
   };
 };

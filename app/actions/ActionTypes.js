@@ -26,6 +26,18 @@ const onChangeProfilePictureRequest = "ON_CHANGE_PROFILE_PICTURE_REQUEST";
 const onChangeProfilePictureSuccess = "ON_CHANGE_PROFILE_PICTURE_SUCCESS";
 const onChangeProfilePictureFailure = "ON_CHANGE_PROFILE_PICTURE_FAILURE";
 
+const getUserStoriesRequest = "GET_USER_STORIES_REQUEST";
+const getUserStoriesSuccess = "GET_USER_STORIES_SUCCESS";
+const getUserStoriesFailure = "GET_USER_STORIES_FAILURE";
+
+const passSelectedUserStoryRequest = "PASS_SELECTED_USER_STORY_REQUEST";
+const passSelectedUserStorySuccess = "PASS_SELECTED_USER_STORY_SUCCESS";
+const passSelectedUserStoryFailure = "PASS_SELECTED_USER_STORY_FAILURE";
+
+const getUserEmergencyRequestsRequest = "GET_USER_EMERGENCY_REQUESTS_REQUEST";
+const getUserEmergencyRequestsSuccess = "GET_USER_EMERGENCY_REQUESTS_SUCCESS";
+const getUserEmergencyRequestsFailure = "GET_USER_EMERGENCY_REQUESTS_FAILURE";
+
 export {
   setUserContact,
   setUserName,
@@ -46,5 +58,14 @@ export {
   onEditStoryFailure,
   onChangeProfilePictureRequest,
   onChangeProfilePictureSuccess,
-  onChangeProfilePictureFailure
+  onChangeProfilePictureFailure,
+  getUserStoriesRequest,
+  getUserStoriesSuccess,
+  getUserStoriesFailure,
+  passSelectedUserStoryRequest,
+  passSelectedUserStorySuccess,
+  passSelectedUserStoryFailure,
+  getUserEmergencyRequestsRequest,
+  getUserEmergencyRequestsSuccess,
+  getUserEmergencyRequestsFailure
 };

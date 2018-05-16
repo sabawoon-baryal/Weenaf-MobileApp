@@ -247,7 +247,8 @@ class UserStoriesPage extends Component {
         toDeleteStory={this.deleteStory}
         id={item.id}
         userProfile={item.user.image}
-        userName={item.user.first_name}
+        userFirstName={item.user.first_name}
+        userLastName={item.user.last_name}
         userIDInStory={item.user_id}
         storyDate={item.created_at}
         storyImage={item.image}
@@ -288,7 +289,7 @@ class UserStoriesPage extends Component {
               onRefresh={this.handleRefresh}
               refreshing={this.state.refreshing}
               onEndReached={this.handleLoadMore}
-              onEndReachedThreshold={5}
+              onEndReachedThreshold={0}
               // scrollEnabled={false}
             />
           </List>

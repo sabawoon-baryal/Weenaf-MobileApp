@@ -13,6 +13,12 @@ import { changeProfile } from "../actions/ActionCreators";
 import { connect } from "react-redux";
 
 class Profile extends Component {
+  constructor() {
+    super();
+    this.state = {
+      storedProfile: null
+    };
+  }
   static navigationOptions = () => {
     return {
       header: (
@@ -36,13 +42,20 @@ class Profile extends Component {
   goToBirthDate = () => {};
   goToFacebook = () => {};
 
-  handleProfileImagePicker = profilePicture => {
+  // change profile
+  handleProfileImagePicker = async profilePicture => {
     this.props.onChangeProfilePicture(profilePicture);
     if (this.props.profilePictureChanged) {
-      console.log("changed");
-      // await AsyncStorage.setItem("USER_PROFILE", profilePicture);
+      console.log("changed profile");
+      await AsyncStorage.setItem("USER_PROFILE", profilePicture);
     }
   };
+  componentDidMount() {
+    let storedProfile = AsyncStorage.getItem("USER_PROFILE");
+    if (storedProfile !== null) {
+      this.setState({ storedProfile: storedProfile });
+    }
+  }
 
   render() {
     return (
@@ -51,6 +64,7 @@ class Profile extends Component {
           <ProfileView
             passData={this.handleProfileImagePicker}
             profileChanged={this.props.profilePictureChanged}
+            storedProfile={this.state.storedProfile}
           />
           <View>
             <UserOptionsView

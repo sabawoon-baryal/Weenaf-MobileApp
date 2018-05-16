@@ -17,6 +17,8 @@ import LoginReducer from "./reducers/LoginReducer";
 import AddStoryButtonReducer from "./reducers/AddStoryButtonReducer";
 import EditStoryReducer from "./reducers/EditStoryReducer";
 import UpdateProfileReducer from "./reducers/UpdateProfileReducer";
+import UserStoriesReducer from "./reducers/UserStoriesReducer";
+import PassSelectedUserStory from "./reducers/PassSelectedUserStory";
 
 // Middleware
 // const middleware = () => {
@@ -50,8 +52,9 @@ export default createStore(
     LoginReducer,
     AddStoryButtonReducer,
     EditStoryReducer,
-    UpdateProfileReducer
+    UpdateProfileReducer,
+    UserStoriesReducer,
+    PassSelectedUserStory
   }),
-  applyMiddleware(thunkMiddleware),
-  applyMiddleware(logger)
+  applyMiddleware(thunkMiddleware, logger)
 );

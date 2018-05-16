@@ -1,4 +1,7 @@
-import { StyleSheet, Text, View, Platform } from "react-native";
+import { StyleSheet, Text, View, Platform, Dimensions } from "react-native";
+
+const { height, width } = Dimensions.get("window");
+const storyCardWidth = (width - 6) / 3;
 
 export const styles = StyleSheet.create({
   container: {
@@ -208,24 +211,32 @@ export const styles = StyleSheet.create({
     height: 200
   },
   profileBackgroundContainer: {
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "flex-end",
+    paddingLeft: "5%",
+    paddingBottom: "7%",
+    height: "100%"
+  },
+  userProfile: {
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-between",
     alignItems: "center",
-    justifyContent: "center",
-    paddingTop: 30
+    paddingRight: 10
   },
   profilePickerBtn: {
     borderTopWidth: 0.5,
     borderBottomWidth: 0.5,
-    padding: 20,
-    height: "100%",
-    alignItems: "center"
+    paddingRight: 20,
+    height: "100%"
   },
   profileName: {
-    paddingVertical: 10,
+    paddingLeft: 10,
     color: "rgb(0,0,0)"
   },
 
   // profile options
-
   profileOptions: {
     borderTopWidth: 0.2,
     backgroundColor: "rgb(255,255,255)"
@@ -251,7 +262,49 @@ export const styles = StyleSheet.create({
   },
   disabledSaveProfilePicture: {
     borderWidth: 0.2,
-    padding: 10,
-    backgroundColor: "red"
+    padding: 10
+  },
+
+  // user stories
+
+  MainContainer: {
+    // flex: 1,
+    justifyContent: "center",
+    backgroundColor: "rgb(255,255,255)",
+    width: "100%"
+  },
+
+  GridViewBlockStyle: {
+    justifyContent: "center",
+    alignItems: "center",
+    height: 100,
+    width: storyCardWidth,
+    margin: 1
+    // backgroundColor: "#00BCD4"
+  },
+  GridViewInsideTextItemStyle: {
+    textAlign: "center",
+    flex: 1,
+    backgroundColor: "rgb(234, 232, 232)",
+    justifyContent: "center",
+    alignItems: "center",
+    width: storyCardWidth,
+    height: 100,
+    paddingVertical: 10
+  },
+  UserStoriesTextStyle: {
+    textAlign: "center",
+    justifyContent: "center",
+    alignItems: "center",
+    margin: 10,
+    fontSize: 14
+  },
+
+  failedLoadStories: {
+    backgroundColor: "rgba(247, 231, 230, 0.5)",
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 30
   }
 });

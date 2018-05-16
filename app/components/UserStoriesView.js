@@ -35,7 +35,8 @@ export class UserStoriesView extends Component {
     };
   }
   handleThePress = () => {
-    this.props.toProfile();
+    if (this.props.id !== null) return;
+    else this.props.toProfile();
   };
 
   setModalVisible = visibile => {
@@ -76,11 +77,15 @@ export class UserStoriesView extends Component {
 
   render() {
     let imageHeight;
-    if (this.props.storyImageHeight == null) {
+    if (
+      this.props.storyImageHeight == null ||
+      this.props.storyImageHeight == undefined
+    ) {
       imageHeight = 0;
     } else {
       imageHeight = this.props.storyImageHeight;
     }
+
     return (
       <View style={styles.ListItemContainer}>
         <View style={styles.ListItemHeader}>
@@ -88,13 +93,17 @@ export class UserStoriesView extends Component {
             <Image
               source={require("../images/profile.jpg")}
               style={styles.profileImage}
+              // get the image from store
             />
           </TouchableWithoutFeedback>
           <View style={{ flexGrow: 1 }}>
             <TouchableWithoutFeedback onPress={this.handleThePress.bind(this)}>
               <View>
                 <Text style={{ color: "black" }}>
-                  {this.props.userName}
+                  {`${this.props.userFirstName}${this.props.userLastName !==
+                  null
+                    ? this.props.userLastName
+                    : ""}`}
                 </Text>
               </View>
             </TouchableWithoutFeedback>

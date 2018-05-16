@@ -19,6 +19,12 @@ import AddStoryHeaderButton from "./AddStoryHeaderButton";
 const localhost = Platform.OS == "android" ? "172.30.10.42" : "localhost";
 
 class AddStoryPage extends Component {
+  constructor() {
+    super();
+    this.state = {
+      imageName: ""
+    };
+  }
   goToProfile = () => {
     this.props.navigation.navigate("Main");
   };
@@ -117,37 +123,46 @@ class AddStoryPage extends Component {
         }
       }
     }
+
+    // adding new story //////////////////////////////////////// :
+
     if (gotDate.editStory == false) {
       if (gotDate.image !== null && gotDate.text !== "") {
         RNFetchBlob.fetch(
           "POST",
-          `http://${localhost}:8000/api/stories`,
+          `http://${localhost}:8000/api/upload-image`,
           {
-            Authorization: "Bearer access-token",
-            otherHeader: "foo",
             "Content-Type": "multipart/form-data"
           },
           [
             {
-              name: "image",
+              name: "file",
               filename: gotDate.image.fileName,
               type: gotDate.image.type,
               data: RNFetchBlob.wrap(gotDate.image.path)
-            },
-            {
-              name: "description",
-              data: gotDate.text
-            },
-            {
-              name: "user_id",
-              data: "10"
             }
           ]
         )
-          .then(resp => {
-            this.props.navigation.navigate("UserStories");
-            // console.log("resp: ", resp);
-            // console.log("text: ", resp.text());
+          .then(response => {
+            console.log("image uploading: ", response);
+            if (response.status == 200) return response.json();
+            else throw response;
+            return null;
+          })
+          .then(responseJson => {
+            console.log("image uploading: ", responseJson);
+            fetch(`http://${localhost}:8000/api/stories`, {
+              method: "POST",
+              headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify({
+                description: gotDate.text,
+                user_id: 10,
+                file: responseJson.success.imageName
+              })
+            });
           })
           .catch(err => {
             console.log("my error: ", err);
